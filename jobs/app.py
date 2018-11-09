@@ -1,6 +1,6 @@
 
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 
 PATH = 'db/jobs.sqlite'
 
@@ -26,7 +26,7 @@ def execute_sql(sql, values=(), commit=False, single=False):
 @app.teardown_appcontext
 def close_connection(exeption):
     connection = getattr(g, '_connection', None)
-    if connection is not None:   
+    if connection is not None:
         connection.close()
 
 
